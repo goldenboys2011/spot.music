@@ -6,4 +6,5 @@ local res = fetch({
   url = status_url,
   method = "GET"
 })
-np.set_content("Now Playing: nothing?")
+
+np.set_content(res)
