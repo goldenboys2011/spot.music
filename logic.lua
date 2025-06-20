@@ -8,4 +8,4 @@ local res = fetch({
   headers = { ["Content-Type"] = "application/json" }
 })
 
-print(res)
+print("HI")
