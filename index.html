@@ -64,30 +64,57 @@
         </div>
     </div>
     <script>
-    async function fetchSongTitle() {
-        try {
-            const response = await fetch('https://rabbit-nights-collect-automobiles.trycloudflare.com/status-json.xsl');
-            const data = await response.json();
+local http = require "http"
+local json = require "json"
+local page = require "page"
 
-            // Find the mount point you're streaming from
-            const source = data.icestats.source;
+-- Your Icecast status endpoint
+local status_url = "https://rabbit-nights-collect-automobiles.trycloudflare.com/status-json.xsl"
 
-            // If there's more than one source, handle that
-            const song = Array.isArray(source)
-                ? source.find(mount => mount.listenurl.includes("/stream"))
-                : source;
+-- Fetch JSON metadata from Icecast
+local function fetch_metadata()
+    local res, err = http.request("GET", status_url)
+    if not res or res.status ~= 200 then
+        return nil, "Failed to fetch metadata"
+    end
+    return res.body, nil
+end
 
-            const title = song && song.title ? song.title : "No song info available";
-            document.getElementById("now-playing").innerText = `Now Playing: ${title}`;
-        } catch (error) {
-            console.error("Error fetching song title:", error);
-            document.getElementById("now-playing").innerText = "Could not load song info";
-        }
-    }
+-- Extract the current song title
+local function get_current_title()
+    local body, err = fetch_metadata()
+    if not body then return "Error: " .. err end
 
-    // Call every 10 seconds to update
-    setInterval(fetchSongTitle, 10000);
-    fetchSongTitle(); // initial call
+    local ok, data = pcall(json.decode, body)
+    if not ok or not data.icestats then
+        return "Invalid metadata format"
+    end
+
+    local source = data.icestats.source
+    if type(source) == "table" then
+        for _, src in ipairs(source) do
+            if src.listenurl and src.listenurl:find("/stream") then
+                return src.title or "Unknown Title"
+            end
+        end
+    elseif type(source) == "table" then
+        return source.title or "Unknown Title"
+    end
+
+    return "No song playing"
+end
+
+-- Update the DOM element
+local function update_now_playing()
+    local title = get_current_title()
+    page.select("#now-playing").text = "Now Playing: " .. title
+end
+
+-- Run on page load and periodically every 10 seconds
+page.on_ready(function()
+    update_now_playing()
+    page.set_interval(update_now_playing, 10000)
+end)
 </script>
 </body>
 </html>
