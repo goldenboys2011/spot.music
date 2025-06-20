@@ -1,6 +1,7 @@
 -- URL to Icecast JSON status
 local status_url = "https://rabbit-nights-collect-automobiles.trycloudflare.com/status-json.xsl"
-
+local np = get("now-playing", false)
+np.set_content("Now Playing: nothing?")
 -- Perform fetch (without triggering OPTIONS)
 local res = fetch({
   url = status_url,
