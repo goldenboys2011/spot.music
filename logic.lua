@@ -1,6 +1,6 @@
 function update_status()
   local res = fetch({
-    url = status_url,
+    url = "https://rabbit-nights-collect-automobiles.trycloudflare.com/status-json.xsl",
     method = "GET"
   })
 
