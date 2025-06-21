@@ -45,6 +45,14 @@ buss://spot.music
 
 ---
 
+OR
+
+Listen Directly here:
+<audio controls>
+  <source src="https://zoo-hugo-civilization-japan.trycloudflare.com/stream" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+
 
 ## 📡 More by WebXPlus Projects
 
