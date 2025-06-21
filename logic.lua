@@ -14,5 +14,5 @@ if np and type(res) == "table" and res.icestats and res.icestats.source and res.
   local title = res.icestats.source.title
   np.set_content("Now Playing: " .. title)
 else
-  print("Element not found or invalid response")
+  print("Element not found or invalid responsee")
 end
