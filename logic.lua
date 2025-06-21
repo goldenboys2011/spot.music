@@ -10,7 +10,7 @@ function update_status()
 
   local ls = get("listeners", false)
   local listeners = res.icestats.source.listeners
-  np.set_content(listeners .. " Listening Now!")
+  ls.set_content(listeners .. " Listening Now!")
 end
 
 -- Schedule `update_status` to run every 10 seconds
