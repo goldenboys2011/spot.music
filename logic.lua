@@ -15,4 +15,6 @@ function update_status()
 end
 
 -- Schedule `update_status` to run every 10 seconds
+update_status()
+
 set_interval(update_status, 10)
