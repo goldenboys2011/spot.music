@@ -5,13 +5,12 @@ function update_status()
   })
 
   local np = get("now-playing", false)
+  local title = res.icestats.source.title
+  np.set_content("Now Playing: " .. title)
 
-  if res and res.icestats and res.icestats.source and res.icestats.source.title then
-    local title = res.icestats.source.title
-    np.set_content("Now Playing: " .. title)
-  else
-    np.set_content("Now Playing: Unknown")
-  end
+  local ls = get("listeners", false)
+  local listeners = res.icestats.source.listeners
+  np.set_content(listeners .. " Listening Now!")
 end
 
 -- Schedule `update_status` to run every 10 seconds
