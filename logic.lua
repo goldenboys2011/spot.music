@@ -1,13 +1,18 @@
-local status_url = "https://rabbit-nights-collect-automobiles.trycloudflare.com/status-json.xsl"
+function update_status()
+  local res = fetch({
+    url = status_url,
+    method = "GET"
+  })
 
--- Fetch Icecast status
-local res = fetch({
-  url = status_url,
-  method = "GET"
-})
+  local np = get("now-playing", false)
 
--- Try to get the "now-playing" element
-local np = get("now-playing", false)
+  if res and res.icestats and res.icestats.source and res.icestats.source.title then
+    local title = res.icestats.source.title
+    np.set_content("Now Playing: " .. title)
+  else
+    np.set_content("Now Playing: Unknown")
+  end
+end
 
-local title = res.icestats.source.title
-np.set_content("Now Playing: " .. title)
+-- Schedule `update_status` to run every 10 seconds
+set_interval(update_status, 10)
