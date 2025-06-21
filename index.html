@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Spot.music</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+        }
+        .player {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .sidebar {
+            background-color: #1c1c1c;
+            padding: 15px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 350px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .sidebar h4 {
+            margin: 10px 0;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        /* Responsive tweaks */
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            .sidebar {
+                position: relative;
+                top: 0;
+                transform: none;
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#playlist">Playlist</a>
+        <a href="#about">About</a>
+    </div>
+    <div style="background-color: rgba(48, 47, 47, 0.705); padding: 10px 0;">
+        <h1>Spot.music</h1>
+    </div>
+    <div class="container">
+        <div class="player">
+            <h2>Music Player</h2>
+            <audio controls src="https://zoo-hugo-civilization-japan.trycloudflare.com/stream"></audio>
+        </div>
+
+        <div class="sidebar">
+            <div>
+                <h3 class="current-server">Loading server...</h3>
+                <h4 class="now-playing">Loading current song...</h4>
+                <h4 class="listeners">Loading current listeners...</h4>
+                <br>
+                <p class="playing-since">Loading date...</p>
+            </div>
+            <div>
+                <a href="https://golden.is-a.dev">By -golden</a>
+            </div>
+        </div>
+    </div>
+    <script src="./logic.lua" version="legacy"></script>
+</body>
+</html>
