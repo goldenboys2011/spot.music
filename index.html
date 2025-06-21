@@ -37,6 +37,22 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .sidebar {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #1c1c1c;
+            padding: 15px;
+            border-radius: 8px;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .sidebar h4 {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -59,8 +75,13 @@
             <center>
                 <h2>Music Player</h2>
                 <audio src="https://rabbit-nights-collect-automobiles.trycloudflare.com/stream">
-                <h4 class="now-playing" style="margin-top: 15px;">Loading current song...</h4>
             </center>
+        </div>
+
+        
+        <div class="sidebar">
+            <h4 class="now-playing">Loading current song...</h4>
+            <h4 class="listeners">Loading current listeners...</h4>
         </div>
     </div>
     <script src="./logic.lua" version="legacy">
