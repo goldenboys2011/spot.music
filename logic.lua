@@ -27,4 +27,4 @@ end
 -- Schedule `update_status` to run every 10 seconds
 update_status()
 
-setInterval(update_status, 10)
+setInterval(update_status, 100)
